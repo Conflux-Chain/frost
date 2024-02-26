@@ -45,7 +45,7 @@ mod verifying_key;
 
 pub use error::{Error, FieldError, GroupError};
 pub use identifier::Identifier;
-use scalar_mul::VartimeMultiscalarMul;
+pub use scalar_mul::VartimeMultiscalarMul;
 // Re-export serde
 #[cfg(feature = "serde")]
 pub use serde;

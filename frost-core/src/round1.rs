@@ -156,6 +156,12 @@ where
     pub fn serialize(&self) -> <C::Group as Group>::Serialization {
         <C::Group>::serialize(&self.0)
     }
+
+    /// Get the inner element
+    #[cfg(feature = "internals")]
+    pub fn element(&self) -> &Element<C>{
+        &self.0
+    }
 }
 
 #[cfg(feature = "serde")]
