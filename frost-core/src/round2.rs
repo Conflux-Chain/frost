@@ -10,6 +10,8 @@ use crate::{
 #[cfg(feature = "serde")]
 use crate::serialization::ScalarSerialization;
 
+use self::keys::SigningShare;
+
 // Used to help encoding a SignatureShare. Since it has a Scalar<C> it can't
 // be directly encoded with serde, so we use this struct to wrap the scalar.
 #[cfg(feature = "serde")]
@@ -156,12 +158,12 @@ fn compute_signature_share<C: Ciphersuite>(
     signer_nonces: &round1::SigningNonces<C>,
     binding_factor: BindingFactor<C>,
     lambda_i: <<<C as Ciphersuite>::Group as Group>::Field as Field>::Scalar,
-    key_package: &keys::KeyPackage<C>,
+    signing_share: &SigningShare<C>,
     challenge: Challenge<C>,
 ) -> SignatureShare<C> {
     let z_share: <<C::Group as Group>::Field as Field>::Scalar = signer_nonces.hiding.0
         + (signer_nonces.binding.0 * binding_factor.0)
-        + (lambda_i * key_package.signing_share.0 * challenge.0);
+        + (lambda_i * signing_share.0 * challenge.0);
 
     SignatureShare::<C> { share: z_share }
 }
@@ -225,7 +227,7 @@ pub fn sign<C: Ciphersuite>(
         signer_nonces,
         binding_factor,
         lambda_i,
-        key_package,
+        &key_package.signing_share,
         challenge,
     );
 
