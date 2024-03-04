@@ -624,6 +624,7 @@ fn evaluate_polynomial<C: Ciphersuite>(
 /// `identifier` as `i` and the `commitment` as the commitment vector φ_ℓ.
 ///
 /// This is also used in Round 2, Step 4 of the DKG.
+#[cfg_attr(feature = "internals", visibility::make(pub))]
 fn evaluate_vss<C: Ciphersuite>(
     identifier: Identifier<C>,
     commitment: &VerifiableSecretSharingCommitment<C>,

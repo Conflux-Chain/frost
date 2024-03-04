@@ -159,7 +159,7 @@ where
 
     /// Get the inner element
     #[cfg(feature = "internals")]
-    pub fn element(&self) -> &Element<C>{
+    pub fn element(&self) -> &Element<C> {
         &self.0
     }
 }
