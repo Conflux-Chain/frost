@@ -601,6 +601,7 @@ pub fn split<C: Ciphersuite, R: RngCore + CryptoRng>(
 /// Implements [`polynomial_evaluate`] from the spec.
 ///
 /// [`polynomial_evaluate`]: https://www.ietf.org/archive/id/draft-irtf-cfrg-frost-14.html#name-evaluation-of-a-polynomial
+#[cfg_attr(feature = "internals", visibility::make(pub))]
 fn evaluate_polynomial<C: Ciphersuite>(
     identifier: Identifier<C>,
     coefficients: &[Scalar<C>],
